@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Origin Verifier</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace" aria-label="Code origin verifier">
+        <aside class="sidebar">
+          <div>
+            <p class="eyebrow">Code Origin Verifier</p>
+            <h1>Check whether code smells human-built or AI-assisted.</h1>
+            <p class="intro">
+              Paste a snippet or upload source files. The verifier looks for explainable signals,
+              not mystical certainty, and shows the evidence behind the verdict.
+            </p>
+          </div>
+
+          <div class="status-card">
+            <span class="status-dot"></span>
+            <div>
+              <strong>Local only</strong>
+              <span>Analysis runs in your browser. No code leaves this page.</span>
+            </div>
+          </div>
+
+          <nav class="tabs" aria-label="Analysis views">
+            <button class="tab is-active" data-view="summary" type="button">Summary</button>
+            <button class="tab" data-view="signals" type="button">Signals</button>
+            <button class="tab" data-view="report" type="button">Report</button>
+          </nav>
+        </aside>
+
+        <section class="main-panel">
+          <div class="input-grid">
+            <label class="drop-zone" for="fileInput">
+              <input id="fileInput" type="file" multiple />
+              <span class="drop-icon" aria-hidden="true">+</span>
+              <strong>Upload source files</strong>
+              <span>JS, TS, Python, Go, Java, CSS, HTML, Markdown and more</span>
+            </label>
+
+            <div class="paste-panel">
+              <div class="panel-heading">
+                <label for="codeInput">Code sample</label>
+                <button id="sampleBtn" class="ghost-button" type="button">Load sample</button>
+              </div>
+              <textarea
+                id="codeInput"
+                spellcheck="false"
+                placeholder="Paste code here, or upload one or more files..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="file-list" id="fileList" aria-live="polite">No files loaded</div>
+            <button id="analyzeBtn" class="primary-button" type="button">Verify code</button>
+          </div>
+
+          <section id="summaryView" class="view is-active" aria-label="Summary results">
+            <div class="verdict-row">
+              <div class="score-ring" id="scoreRing" style="--score: 0">
+                <span id="scoreValue">0</span>
+                <small>risk</small>
+              </div>
+              <div class="verdict-copy">
+                <p class="eyebrow">Verdict</p>
+                <h2 id="verdictTitle">Awaiting code</h2>
+                <p id="verdictText">
+                  Add code to generate a grounded audit with specific evidence.
+                </p>
+              </div>
+            </div>
+
+            <div class="metric-grid">
+              <div class="metric">
+                <span id="linesMetric">0</span>
+                <small>lines</small>
+              </div>
+              <div class="metric">
+                <span id="commentMetric">0%</span>
+                <small>comment ratio</small>
+              </div>
+              <div class="metric">
+                <span id="repeatMetric">0%</span>
+                <small>similar lines</small>
+              </div>
+              <div class="metric">
+                <span id="markerMetric">0</span>
+                <small>AI markers</small>
+              </div>
+            </div>
+          </section>
+
+          <section id="signalsView" class="view" aria-label="Signal breakdown">
+            <div class="signals" id="signals"></div>
+          </section>
+
+          <section id="reportView" class="view" aria-label="Detailed report">
+            <div class="report-actions">
+              <button id="copyBtn" class="ghost-button" type="button">Copy report</button>
+            </div>
+            <pre id="reportOutput">No report yet.</pre>
+          </section>
+        </section>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
